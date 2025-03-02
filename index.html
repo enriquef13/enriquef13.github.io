@@ -11,6 +11,77 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.9);
+			}
+	
+			.modal-content {
+				margin: auto;
+				display: block;
+				max-width: 90%;
+				max-height: 90vh;
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+	
+			.close {
+				position: absolute;
+				top: 15px;
+				right: 35px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+	
+			.prev, .next {
+				cursor: pointer;
+				position: absolute;
+				top: 50%;
+				padding: 16px;
+				margin-top: -50px;
+				color: white;
+				font-weight: bold;
+				font-size: 30px;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+	
+			.next {
+				right: 0;
+				border-radius: 3px 0 0 3px;
+			}
+	
+			.prev {
+				left: 0;
+				border-radius: 0 3px 3px 0;
+			}
+	
+			.prev:hover, .next:hover {
+				background-color: rgba(0, 0, 0, 0.8);
+			}
+
+			#interest .image img {
+				transition: all 0.3s ease;
+				border: 2px solid transparent;
+			}
+
+			#interest .image img:hover {
+				transform: scale(1.02);
+				border-color: #453939;
+				box-shadow: 0 0 10px rgba(69, 57, 57, 0.3);
+				cursor: pointer;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -154,54 +225,61 @@
 								Some cool things that I have done in my free time. 
 							</p>
 
+							<div id="imageModal" class="modal">
+								<span class="close">&times;</span>
+								<span class="prev">&#10094;</span>
+								<span class="next">&#10095;</span>
+								<img class="modal-content" id="modalImg">
+							</div>
+
 							<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 								<div>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Self-Portrait</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/me_drawing.png" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Dad's Horse</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/horse.png" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Titi</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/titi.png" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Rubber Band Gun</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/rubber_gun.jpg" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Hand Gesture-Controlled RC Car</p>
-									<video style="width: 75%; height: auto;" src="images/hand_car.mp4" title="Hand Gesture-Controlled RC Car" allowfullscreen controls muted playsinline defaultMuted></video>
+									<video style="width: 100%; height: auto;" src="images/hand_car.mp4" title="Hand Gesture-Controlled RC Car" allowfullscreen controls muted playsinline defaultMuted></video>
 								</div>
 								<div>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Tita</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/tita.png" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Gaze</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
 										<img src="images/eye.png" alt="">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Neighbor's Dog</p>
-									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 80%;">
-										<img src="images/dog.png" alt="">
+									<a class="image" target="_blank" style="display: block; overflow: hidden; width: 100%;">
+										<img src="images/dog.png" alt="Dog">
 									</a>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px;">Rubber Band Gun</p>
-									<video style="width: 75%; height: auto;" src="images/rubber_gun.mp4" title="Rubber Band Gun" allowfullscreen controls muted playsinline defaultMuted></video>
+									<video style="width: 100%; height: auto;" src="images/rubber_gun.mp4" title="Rubber Band Gun" allowfullscreen controls muted playsinline defaultMuted></video>
 									
 									<p style="font-size: 18px; font-weight: 500; margin: 5px; ">OP3 (ROS) Tracking with OpenCV</p>
-									<video style="width: 75%; height: auto;" src="images/op3_ros.mp4" title="OP3 (ROS) Tracking with OpenCV" allowfullscreen controls muted playsinline defaultMuted></video>
+									<video style="width: 100%; height: auto;" src="images/op3_ros.mp4" title="OP3 (ROS) Tracking with OpenCV" allowfullscreen controls muted playsinline defaultMuted></video>
 								</div>
 							</div>
 
@@ -245,6 +323,62 @@
 					img.addEventListener('mouseout', function() {
 						this.style.transform = 'scale(1)';
 					});
+				});
+			</script>
+			<script>
+				const modal = document.getElementById("imageModal");
+				const modalImg = document.getElementById("modalImg");
+				const images = document.querySelectorAll('#interest img');
+				let currentIndex = 0;
+			
+				// Add click event to all images
+				images.forEach((img, index) => {
+					img.addEventListener('click', function() {
+						modal.style.display = "block";
+						modalImg.src = this.src;
+						currentIndex = index;
+					});
+				});
+			
+				// Close button
+				document.querySelector(".close").addEventListener('click', function() {
+					modal.style.display = "none";
+				});
+			
+				// Next button
+				document.querySelector(".next").addEventListener('click', function() {
+					currentIndex = (currentIndex + 1) % images.length;
+					modalImg.src = images[currentIndex].src;
+				});
+			
+				// Previous button
+				document.querySelector(".prev").addEventListener('click', function() {
+					currentIndex = (currentIndex - 1 + images.length) % images.length;
+					modalImg.src = images[currentIndex].src;
+				});
+			
+				// Close on outside click
+				modal.addEventListener('click', function(e) {
+					if (e.target === modal) {
+						modal.style.display = "none";
+					}
+				});
+			
+				// Keyboard navigation
+				document.addEventListener('keydown', function(e) {
+					if (modal.style.display === "block") {
+						if (e.key === "ArrowRight") {
+							currentIndex = (currentIndex + 1) % images.length;
+							modalImg.src = images[currentIndex].src;
+						}
+						else if (e.key === "ArrowLeft") {
+							currentIndex = (currentIndex - 1 + images.length) % images.length;
+							modalImg.src = images[currentIndex].src;
+						}
+						else if (e.key === "Escape") {
+							modal.style.display = "none";
+						}
+					}
 				});
 			</script>
 
