@@ -1367,6 +1367,7 @@ input, select, textarea {
 	strong, b, h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
 		color: #363636;
+		text-align: justify;
 	}
 
 	h1 {
@@ -1981,7 +1982,7 @@ input, select, textarea {
 
 			#main > .panel.intro {
 				padding: 0;
-				height: 23em;
+				height: 23.5em;
 				display: -moz-flex;
 				display: -webkit-flex;
 				display: -ms-flex;
