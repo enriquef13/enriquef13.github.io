@@ -1377,6 +1377,7 @@ input, select, textarea {
 	h2 {
 		font-size: 1.8em;
 		letter-spacing: -0.015em;
+		font-weight: bold;
 	}
 
 	h3, h4, h5, h6 {
@@ -1980,7 +1981,7 @@ input, select, textarea {
 
 			#main > .panel.intro {
 				padding: 0;
-				height: 20em;
+				height: 23em;
 				display: -moz-flex;
 				display: -webkit-flex;
 				display: -ms-flex;
@@ -2093,6 +2094,8 @@ input, select, textarea {
 					#main > .panel.intro header h1 {
 						line-height: 1.25em;
 						margin-bottom: 0;
+						font-weight: bold; 
+						font-size: 1.65em;
 					}
 
 					#main > .panel.intro header p {
