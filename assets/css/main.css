@@ -2103,6 +2103,7 @@ input, select, textarea {
 						letter-spacing: -0.015em;
 						font-size: 1.25em;
 						margin: 0.25em 0 0 0;
+						line-height: 1.2;
 					}
 
 				@media screen and (max-width: 980px) {
@@ -2140,6 +2141,7 @@ input, select, textarea {
 						#main > .panel.intro header p {
 							font-size: 1em;
 							margin: 0.25em 0 0 0;
+							line-height: 1.1;
 						}
 
 				}
