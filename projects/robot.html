@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Pick-and-Place Robot</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="icon" href="../assets/css/images/ef_icon.png" />
+        <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            .equation {
+                margin: 1em 0;
+                padding: 1em;
+                background: white;
+                border-radius: 5px;
+            }
+            .project-content {
+                max-width: 50em;
+                margin: 0 auto;
+                padding: 2em;
+                background: white;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                margin-top: 80px; /* Space for the back button */
+            }
+            .back-button {
+                position: fixed;
+                top: 30px;
+                left: 30px;
+                z-index: 1000;
+                padding: 10px 20px;
+                background: black;
+                color: white;
+                font-weight: bolder;
+                text-decoration: none;
+                border-radius: 10px;
+                transition: background-color 0.3s ease;
+            }
+            .back-button:hover {
+                background: #5a4a4a;
+            }
+            .project-image {
+                width: 100%;
+                max-width: 500px;
+                margin: 2em 0;
+            }
+            .wrapper {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body class="is-preload">
+        <a href="../index.html#projects" class="back-button">← Back to Projects</a>
+        
+        <div class="project-content">
+            <div class="wrapper">
+                <h1>Pick-and-Place Robot</h1>
+                <p style="margin-top: 1em; line-height: 1.2;">Design, manufacturing, and control of an aluminum, low-cost 2-axis pick-and-place parallel robot.</p>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <video style="height: 17em; margin-left: 1em;" src="robot/vid1.mp4" title="Setting home" controls autoplay muted defaultMuted></video>
+                    <img style="height: 17em; width:auto; margin-right: 1em;" src="../images/robot.png" alt="Robot image">
+                </div>
+                
+                <h2 style="margin-top: 1em;">Overview</h2>
+                <p style="margin-top: 1em;">This is an undergraduate project I worked on during my studies at Monterrey Tech. The main goal was to design and develop a lightweight and competitively priced robotic workstation for an industrial manufacturing cell, as existing solutions are generally lacking in both areas, as shown below. This required the use of a parallel pick-and-place robot with 2 Degrees of Freedom (DoF), a working area of 450 x 200 mm, and compatibility with industrial communication protocols.</p>
+            
+
+                <h2>Design</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1em;">
+                    <p style="margin-top: 0px;">Mirroring arms were designed to achieve a workspace of, at least, 450 x 200 mm. The entire working area, however, is noted with construction lines in the image on the right. Hence, this total area was considered as the maximum limit for operator safety. 
+                        <br>
+                        <br>
+                    With this design, inverse kinematics were used to relate the end effector's position \((x, y)\) to the stepper motor-controlled arm angle \((\theta_1)\). Calculations for a single arm are shown below, as both arms follow similar kinematics. 
+                    </p>
+                    <img style="width: 35%; margin-left: 3em; margin-right: 2em; margin-top: -2em;" src="robot/img1.png" alt="Working area">
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    
+                    <p style="line-height: 2em;">
+                        From the Pythagorean Theorem: 
+                        <br>
+                        \( A = \sqrt{x^2 + y^2} \)  
+                        
+                        <br>
+                        Applying the Law of Cosines:
+                        <br>
+                        
+                        \( A^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(180^\circ - \theta_2)\)
+                        
+                        <br>
+                        Hence:
+                        <br>
+                        
+                        \(x^2 + y^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(\theta_2)\)
+                        
+                        <br>
+                        We create a new variable \(D\) to simplify:
+                        <br>
+                        
+                        \(D = \cos(\theta_2) = \frac{x^2 + y^2 - l_1^2 - l_2^2}{2l_1l_2}\)
+                    </p>
+
+                    <img style="width: 50%; margin-right: 2em;" src="robot/img2.png" alt="Inverse kinematics">
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1em;">
+                    <div style="width: 48%;">
+                        <p style="line-height: 2em;">
+                            Using the Pythagorean identity:  
+                            <br>
+                            \(\cos^2(\theta) + \sin^2(\theta) = 1\)   
+                            <br>
+                            \(\sin(\theta) = \sqrt{1 - \cos^2(\theta)}\)  
+                            <br>
+                            Substituting \(D = \cos(\theta_2)\):  
+                            <br>
+                            \(\sin(\theta) = \sqrt{1 - D^2}\)  
+                            <br>
+                            Therefore:  
+                            <br>
+                            \(\theta_2 = \tan^{-1}\left(\frac{\sqrt{1 - D^2}}{D}\right)\) 
+                        </p>
+                    </div>
+                    <div style="width: 48%;">
+                        <p style="line-height: 1.9em;">
+                            Now, solving for \( \theta_1 \):
+                            <br>
+                            \( \theta_1 = \alpha - \beta \)
+                            <br>
+                            Finding equations for \( \alpha \) and \( \beta \):
+                            <br>
+                            \( \alpha = \tan^{-1} \left( \frac{y}{x} \right) \)
+                        </p>
+                        <p style="line-height: 3em; margin-top: -5em;">
+                            <br>
+                            \( \tan(\beta) = \frac{l_2 \sin(\theta_2)}{l_1 + l_2 \cos(\theta_2)} \)
+                            <br>
+                            \( \beta = \tan^{-1} \left( \frac{l_2 \sin(\theta_2)}{l_1 + l_2 \cos(\theta_2)} \right) \)
+                        </p>
+                    </div>
+                </div>
+
+                
+                <p style="margin-top: -1em; margin-left: -3em; text-align: center;">
+                    The final equation for \( \theta_1 \) is:
+                    <br>
+                    \( \theta_1 = \tan^{-1} \left( \frac{y}{x} \right) - \tan^{-1} \left( \frac{l_2 \sin(\theta_2)}{l_1 + l_2 \cos(\theta_2)} \right) \)
+                </p>
+                
+                <p>
+                    With this, Denavit-Hartenberg parameters were obtained to model each one of the arms from any given \((x, y)\) coordinate pair, making the control of the robot's end effector straightforward. The robot's parts were then Designed for Manufacturing (DFM), obtaining the following model.
+                </p>
+
+                <img style="width: 100%; margin-top: -1em;" src="robot/img3.png" alt="Robot model">
+                
+                <h2>Technical Details</h2>
+                <ul>
+                    <li>Technology 1</li>
+                    <li>Technology 2</li>
+                    <li>Technology 3</li>
+                </ul>
+                
+                <h2>Results</h2>
+                <p>Project outcomes and achievements...</p>
+                
+                <h2>Gallery</h2>
+                <!-- Add more images or videos here -->
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/browser.min.js"></script>
+        <script src="../assets/js/breakpoints.min.js"></script>
+        <script src="../assets/js/util.js"></script>
+        <script src="../assets/js/main.js"></script>
+    </body>
+</html>

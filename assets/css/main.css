@@ -1326,10 +1326,10 @@ input, select, textarea {
 
 	body, input, textarea, select {
 		font-family: 'Source Sans Pro', sans-serif;
-		font-weight: 300;
-		color: #777777;
+		font-weight: lighter;
+		color: #302f2f;
 		font-size: 20pt;
-		line-height: 1.75em;
+		line-height: 1.3em;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -1367,7 +1367,7 @@ input, select, textarea {
 	strong, b, h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
 		color: #363636;
-		text-align: justify;
+		text-align: left;
 	}
 
 	h1 {
@@ -1982,7 +1982,7 @@ input, select, textarea {
 
 			#main > .panel.intro {
 				padding: 0;
-				height: 26em;
+				height: 30em;
 				display: -moz-flex;
 				display: -webkit-flex;
 				display: -ms-flex;
