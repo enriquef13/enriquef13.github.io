@@ -128,6 +128,28 @@
 			.bottom-contact a:hover {
 				color: #cccccc;
 			}
+
+			.flex-container {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+			}
+
+			.flex-item {
+				flex: 1;
+			}
+
+			/* Mobile responsiveness */
+			@media screen and (max-width: 768px) {
+				.flex-container {
+					flex-direction: column;
+				}
+
+				.flex-item {
+					width: 100%;
+					margin: 10px 0;
+				}
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -207,58 +229,85 @@
 								This is an overview of the projects I have worked on at MIT and Monterrey Tech. Click on the images to learn more about each project. <strong>Feel free to ask any questions!</strong> (Contact information on fourth tab)
 							</p>
 							
-							<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-								<div>
-										
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px;">Pick-and-Place Robot</p>
-									<p style="font-size: 0.9em; color:#453939; text-align: left; margin-bottom: 10px; margin-top: 5px;">Design, manufacturing, and control of a 2-axis robot.</p>
-									<a href="projects/robot.html" class="image fit" style="display: block; overflow: hidden; margin-bottom: 15px;">
-										<img src="images/robot.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
+								<div class="flex-container" style="flex-direction: column; gap: 30px;">
+									<!-- First row -->
+									<div class="flex-container" style="gap: 20px;">
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px;">Pick-and-Place Robot</p>
+											<p style="font-size: 0.9em; color:#453939; text-align: left; margin-bottom: 10px; margin-top: 5px;">Design, manufacturing, and control of a 2-axis robot.</p>
+											<a href="projects/robot.html" class="image fit" style="display: block; overflow: hidden; margin-bottom: 15px;">
+												<img src="images/robot.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">AwAir</p>
+											<p style="font-size: 0.9em; color:#453939; text-align: left; margin-bottom: 10px; margin-top: 5px;">Sustainable network of air quality sensors.</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/awair.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+									</div>
+							
+									<!-- Second row -->
+									<div class="flex-container" style="gap: 20px;">
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Import Optimization for MAKA Motors</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/maka.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">FrED Process Control</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/fred.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+									</div>
+							
+									<!-- Third row -->
+									<div class="flex-container" style="gap: 20px;">
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Reading Glove</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/reading_glove.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">GenCAD-Self-Repairing</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/gencad.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+									</div>
 									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Import Optimization for MAKA Motors</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/maka.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Reading Glove</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/reading_glove.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
+									<!-- Fourth row -->
+									<div class="flex-container" style="gap: 20px;">
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Rowing Machine</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/rowing.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Motorized Wheelchair</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/electric_wheel.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+									</div>
 
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">Rowing Machine</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/rowing.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">Brace for Bowed Legs</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/bowed.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
+									<div class="flex-container" style="gap: 20px;">
+										<div class="flex-item">
+											<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 0px">Knee Brace for Bowed Legs</p>
+											<a href="" class="image fit" style="display: block; overflow: hidden;">
+												<img src="images/bowed.png" alt="" style="transition: transform 0.4s ease;">
+											</a>
+										</div>
+										<div class="flex-item">
+											
+										</div>
+									</div>
 								</div>
-								
-								<div>
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">AwAir</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/awair.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">FrED Process Control</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/fred.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">GenCAD-Self-Repairing</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/gencad.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-									
-									<p style="font-size: 1.2em; color:#453939; font-weight:bold; text-align: left; margin: 10px">Motorized Wheelchair</p>
-									<a href="" class="image fit" style="display: block; overflow: hidden;">
-										<img src="images/electric_wheel.png" alt="" style="transition: transform 0.4s ease;">
-									</a>
-								</div>
-							</div>
 						</article>
 
 						<!-- Interests -->
