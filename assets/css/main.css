@@ -1367,7 +1367,7 @@ input, select, textarea {
 	strong, b, h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
 		color: #363636;
-		text-align: left;
+		text-align: justify;
 	}
 
 	h1 {
@@ -1384,6 +1384,10 @@ input, select, textarea {
 	h3, h4, h5, h6 {
 		font-size: 1.25em;
 		letter-spacing: -0.015em;
+	}
+
+	p {
+		text-align: justify;
 	}
 
 	@media screen and (max-width: 736px) {
@@ -1454,7 +1458,7 @@ input, select, textarea {
 		}
 
 		table.default th {
-			text-align: left;
+			text-align: justify;
 			font-weight: 400;
 			padding: 0.5em 1em 0.5em 1em;
 		}
@@ -2123,7 +2127,7 @@ input, select, textarea {
 
 						#main > .panel.intro header {
 							padding: 4em;
-							text-align: center;
+							text-align: justify;
 						}
 
 				}
