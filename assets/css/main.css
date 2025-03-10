@@ -1771,11 +1771,11 @@ input, select, textarea {
 
 /* Nav */
 
-	#nav {
-		text-align: center;
-		height: 4.25em;
-		cursor: default;
-	}
+		#nav {
+			text-align: center;
+			height: 4.25em;
+			cursor: default;
+		}
 
 		#nav a {
 			position: relative;
@@ -1880,7 +1880,7 @@ input, select, textarea {
 		margin: 0 auto;
 		min-height: 100vh;
 		max-width: 100%;
-		padding: 4em 0;
+		padding: 2em 0;
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
