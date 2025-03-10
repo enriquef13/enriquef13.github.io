@@ -32,6 +32,7 @@
 				position: relative;
 				top: 50%;
 				transform: translateY(-50%);
+				z-index: 1000;
 			}
 	
 			.close {
@@ -42,6 +43,7 @@
 				font-size: 40px;
 				font-weight: bold;
 				cursor: pointer;
+				z-index: 1001;
 			}
 	
 			.prev, .next {
@@ -55,6 +57,8 @@
 				font-size: 30px;
 				user-select: none;
 				-webkit-user-select: none;
+				background-color: rgba(0, 0, 0, 0.8);
+				z-index: 1001;
 			}
 	
 			.next {

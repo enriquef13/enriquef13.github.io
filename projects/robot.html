@@ -48,6 +48,171 @@
             .wrapper {
                 padding: 20px;
             }
+
+            .flex-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+                margin: 1em 0;
+            }
+
+            .flex-item {
+                flex: 1;
+            }
+
+            .flex-text {
+                line-height: 1.3em;
+            }
+
+            .flex-image {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .flex-video {
+                width: 100%;
+                height: auto;
+            }
+
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                margin: 2em 0;
+            }
+            
+            .gallery-item {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 4/3;
+                cursor: pointer;
+                overflow: hidden;
+            }
+            
+            .gallery-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            
+            .gallery-item:hover img {
+                transform: scale(1.05);
+            }
+
+            .gallery-item video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .gallery-item:hover video {
+                transform: scale(1.05);
+            }
+
+            .modal-content.video {
+                width: 80%;
+                height: auto;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+
+            .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 90%;
+                max-height: 90vh;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                object-fit: contain;
+                z-index: 1000;
+            }
+
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1001;  /* Add this line to make arrows appear in front */
+            }
+
+            .prev, .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 16px;
+                margin-top: -50px;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+                -webkit-user-select: none;
+                z-index: 1001;  /* Add this line to make arrows appear in front */
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            
+            /* Media queries for mobile responsiveness */
+            @media screen and (max-width: 768px) {
+                .flex-container {
+                    flex-direction: column;
+                }
+
+                .flex-item {
+                    width: 100%;
+                    margin: 10px 0;
+                }
+
+                .project-content {
+                    padding: 1em;
+                    margin-top: 60px;
+                }
+
+                .wrapper {
+                    padding: 10px;
+                }
+
+                .equation {
+                    padding: 0.5em;
+                    font-size: 0.9em;
+                }
+
+                .gallery-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+            }
         </style>
     </head>
     <body class="is-preload">
@@ -56,58 +221,70 @@
         <div class="project-content">
             <div class="wrapper">
                 <h1>Pick-and-Place Robot</h1>
-                <p style="margin-top: 1em; line-height: 1.2;">Design, manufacturing, and control of an aluminum, low-cost 2-axis pick-and-place parallel robot.</p>
+                <p style="margin-top: 1em;">Design, manufacturing, and control of an aluminum, low-cost 2-axis pick-and-place parallel robot.</p>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <video style="height: 17em; margin-left: 1em;" src="robot/vid1.mp4" title="Setting home" controls autoplay muted defaultMuted></video>
-                    <img style="height: 17em; width:auto; margin-right: 1em;" src="../images/robot.png" alt="Robot image">
+                <div class="flex-container" style="margin-top: -1em;">
+                    <div class="flex-item flex-video" style="height: 17em;">
+                        <video class="flex-video" src="robot/vid1.mp4" title="Setting home" autoplay muted defaultMuted style="height: 100%;"></video>
+                    </div>
+                    <div class="flex-item flex-image" style="height: 17em;">
+                        <img class="flex-image" src="../images/robot.png" alt="Robot image" style="height: 100%; width: 100%;">
+                    </div>
                 </div>
                 
                 <h2 style="margin-top: 1em;">Overview</h2>
-                <p style="margin-top: 1em;">This is an undergraduate project I worked on during my studies at Monterrey Tech. The main goal was to design and develop a lightweight and competitively priced robotic workstation for an industrial manufacturing cell, as existing solutions are generally lacking in both areas, as shown below. This required the use of a parallel pick-and-place robot with 2 Degrees of Freedom (DoF), a working area of 450 x 200 mm, and compatibility with industrial communication protocols.</p>
+                <p style="margin-top: 1em;">This is an undergraduate project I worked on during my studies at Monterrey Tech with a team of 6 mechatronics engineers. The main goal was to design and develop a lightweight and competitively priced robotic workstation for an industrial manufacturing cell, as existing solutions are generally lacking in both areas, as shown below. This required the use of a parallel pick-and-place robot with 2 Degrees of Freedom (DoF), a working area of 450 x 200 mm, and compatibility with industrial communication protocols.</p>
             
 
                 <h2>Design</h2>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1em;">
-                    <p style="margin-top: 0px;">Mirroring arms were designed to achieve a workspace of, at least, 450 x 200 mm. The entire working area, however, is noted with construction lines in the image on the right. Hence, this total area was considered as the maximum limit for operator safety. 
-                        <br>
-                        <br>
-                    With this design, inverse kinematics were used to relate the end effector's position \((x, y)\) to the stepper motor-controlled arm angle \((\theta_1)\). Calculations for a single arm are shown below, as both arms follow similar kinematics. 
-                    </p>
-                    <img style="width: 35%; margin-left: 3em; margin-right: 2em; margin-top: -2em;" src="robot/img1.png" alt="Working area">
+                <div class="flex-container">
+                    <div class="flex-item flex-text">
+                        <p style="margin-right: 2em;">Mirroring arms were designed to achieve a workspace of, at least, 450 x 200 mm. The entire working area, however, is noted with construction lines in the image on the right. Hence, this total area was considered as the maximum limit for operator safety. 
+                            <br>
+                            <br>
+                            With this design, inverse kinematics were used to relate the end effector's position \((x, y)\) to the stepper motor-controlled arm angle \((\theta_1)\). Calculations for a single arm are shown below, as both arms follow similar kinematics. 
+                        </p>
+                    </div>  
+                    <div class="flex-item" style="height: 18em; margin-top: -2em;">
+                        <img class="flex-image" src="robot/img1.png" alt="Working area" style="height: 100%;">
+                    </div>
                 </div>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    
-                    <p style="line-height: 2em;">
-                        From the Pythagorean Theorem: 
-                        <br>
-                        \( A = \sqrt{x^2 + y^2} \)  
+                <div class="flex-container">
+                    <div class="flex-item flex-text" style="margin-top: -2em;">
                         
-                        <br>
-                        Applying the Law of Cosines:
-                        <br>
-                        
-                        \( A^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(180^\circ - \theta_2)\)
-                        
-                        <br>
-                        Hence:
-                        <br>
-                        
-                        \(x^2 + y^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(\theta_2)\)
-                        
-                        <br>
-                        We create a new variable \(D\) to simplify:
-                        <br>
-                        
-                        \(D = \cos(\theta_2) = \frac{x^2 + y^2 - l_1^2 - l_2^2}{2l_1l_2}\)
-                    </p>
+                        <p style="line-height: 2em;">
+                            From the Pythagorean Theorem: 
+                            <br>
+                            \( A = \sqrt{x^2 + y^2} \)  
+                            
+                            <br>
+                            Applying the Law of Cosines:
+                            <br>
+                            
+                            \( A^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(180^\circ - \theta_2)\)
+                            
+                            <br>
+                            Hence:
+                            <br>
+                            
+                            \(x^2 + y^2 = l_1^2 + l_2^2 + 2l_1l_2 \cos(\theta_2)\)
+                            
+                            <br>
+                            We create a new variable \(D\) to simplify:
+                            <br>
+                            
+                            \(D = \cos(\theta_2) = \frac{x^2 + y^2 - l_1^2 - l_2^2}{2l_1l_2}\)
+                        </p>
+                    </div>
 
-                    <img style="width: 50%; margin-right: 2em;" src="robot/img2.png" alt="Inverse kinematics">
+                    <div class="flex-item" style="height: 15em; margin-top: -3em;">
+                        <img class="flex-image" src="robot/img2.png" alt="Inverse kinematics" style="height: 100%;">
+                    </div>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1em;">
-                    <div style="width: 48%;">
+                <div class="flex-container" style="margin-top: -1em;">
+                    <div class="flex-item flex-text" style="margin-top: -1em;">
                         <p style="line-height: 2em;">
                             Using the Pythagorean identity:  
                             <br>
@@ -124,7 +301,8 @@
                             \(\theta_2 = \tan^{-1}\left(\frac{\sqrt{1 - D^2}}{D}\right)\) 
                         </p>
                     </div>
-                    <div style="width: 48%;">
+                    
+                    <div class="flex-item flex-text" style="margin-top: -1em;">
                         <p style="line-height: 1.9em;">
                             Now, solving for \( \theta_1 \):
                             <br>
@@ -151,23 +329,122 @@
                 </p>
                 
                 <p>
-                    With this, Denavit-Hartenberg parameters were obtained to model each one of the arms from any given \((x, y)\) coordinate pair, making the control of the robot's end effector straightforward. The robot's parts were then Designed for Manufacturing (DFM), obtaining the following model.
+                    With this, Denavit-Hartenberg parameters were obtained to model each one of the arms from any given \((x, y)\) coordinate pair, making the control of the robot's end effector straightforward. The robot's parts were then <strong>Designed for Manufacturing (DFM)</strong>, obtaining the following model.
+                </p>
+                
+                <img style="width: 100%; margin-top: -1em; margin-bottom: 1em;" src="robot/img3.png" alt="Robot CAD model">
+                
+                <p>
+                    Furthermore, a <strong>Finite Element Analysis (FEA)</strong> was performed to ensure the robot's structural integrity when carrying a 2 kg payload. The results showed that the aluminum parts could withstand the required loads without any issues.
+                </p>
+                
+                <img class="flex-image" style="width: 80%; margin-top: -1em; margin-bottom: 1em; display: block; margin-left: auto; margin-right: auto;" src="robot/img4.png" alt="Robot FEA">
+
+                <h2>Manufacturing</h2>
+                <p style="margin-top: 1em;">
+                    Fusion360 was utilized to generate the G-code for the CNC machine, which was used to manufacture most of the robot's parts. The rest were manufactured with manual lathes, manual mills, bench drills, band saws, and bend grinders. Below is a gallery of the robot's manufacturing process.
+                </p>
+                <div class="gallery-grid" style="margin-top: -1em;">
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_2.png" alt="Manufacturing process 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_3.png" alt="Manufacturing process 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_4.png" alt="Manufacturing process 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_5.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_6.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_7.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_8.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_9.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_10.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_11.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_12.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/mfg_gallery/img_13.png" alt="Manufacturing process 4">
+                    </div>
+                </div>
+                
+                <div id="galleryModal" class="modal">
+                    <span class="close">&times;</span>
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
+                    <div class="numbertext"></div>
+                    <img class="modal-content" id="modalImg">
+                </div>
+                
+                <h2>System Integration</h2>
+                <p style="margin-top: 1em;">
+                    After manufacturing, the robot was integrated with control components that allowed for automatic object detection, pick-and-place operations, home-setting, and emergency stops. These tasks were completed with a Siemens S7-1200 PLC, a Cognex In-Sight 7000 vision system, limit switches, and a pneumatic solenoid valve. Furthermore, a P controller was added to automatically adjust the robot's speed based on the distance to the target object. Finally, a <strong>Human Machine Interface (HMI)</strong> was developed to allow for manual control of the robot, as well as monitoring during regular operation. The HMI is shown below.
                 </p>
 
-                <img style="width: 100%; margin-top: -1em;" src="robot/img3.png" alt="Robot model">
-                
-                <h2>Technical Details</h2>
-                <ul>
-                    <li>Technology 1</li>
-                    <li>Technology 2</li>
-                    <li>Technology 3</li>
-                </ul>
-                
+                <div class="flex-container" style="margin-top: -1em;">
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="robot/img5.png" title="HMI 1" style="height: 100%;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="robot/img6.png" alt="HMI 2" style="height: 100%; width: 100%;">
+                    </div>
+                </div>
+
+
                 <h2>Results</h2>
-                <p>Project outcomes and achievements...</p>
+                <p style="margin-top: 1em;">
+                    The robot was able to perform pick-and-place operations with a 2 kg payload within the specified workspace, with a precision of 0.04 mm, and a speed of up to 120\(^\circ\) per second in terms of motor rotation. When comparing our robot to commercially available solutions, we found that <strong>our robot was more than 5 times cheaper than the closest competitor, while having a maximum range above the average</strong>. The final costs and results are shown below.
+                </p>
+
+                <div class="flex-container" style="margin-top: -1em; height: auto;">
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="robot/img7.png" title="Results 1" style="height: 100%;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img class="flex-image " src="robot/img8.png" alt="Results 2" style="height: 100%; width: 100%;">
+                    </div>
+                </div>
                 
                 <h2>Gallery</h2>
-                <!-- Add more images or videos here -->
+                <div class="gallery-grid" style="margin-top: 1em;">
+                    <div class="gallery-item">
+                        <video src="robot/gallery/vid1.mp4" title="" autoplay muted></video>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/gallery/img1.png" title="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/gallery/img2.png" title="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/gallery/img3.jpg" title="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/gallery/img4.jpg" title="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="robot/gallery/img5.jpg" title="">
+                    </div>
+                </div>
+
+                <h2>Contributors</h2>
+                <p style="margin-top: 1em; margin-bottom: -1em;"> Alejandro Butterfield, Marlene Cobian, Christi Eguiza, Jesus Cervantes, & Ana Isabel Padilla</p>
+                 
             </div>
         </div>
 
@@ -177,5 +454,85 @@
         <script src="../assets/js/breakpoints.min.js"></script>
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
+        <script>
+            const modal = document.getElementById("galleryModal");
+            const modalContent = document.getElementById("modalImg");
+            const galleryItems = document.querySelectorAll('.gallery-item img, .gallery-item video');
+            let currentIndex = 0;
+            let modalMedia = modalContent;
+        
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    modal.style.display = "block";
+                    showMedia(index);
+                });
+            });
+        
+            function showMedia(index) {
+                const item = galleryItems[index];
+                if (item.tagName === 'VIDEO') {
+                    const modalVideo = document.createElement('video');
+                    modalVideo.src = item.src;
+                    modalVideo.classList.add('modal-content');
+                    modalVideo.classList.add('video');
+                    modalVideo.controls = true;
+                    modalVideo.autoplay = true;
+                    
+                    modalMedia.replaceWith(modalVideo);
+                    modalMedia = modalVideo;
+                } else {
+                    const modalImg = document.createElement('img');
+                    modalImg.src = item.src;
+                    modalImg.classList.add('modal-content');
+                    
+                    modalMedia.replaceWith(modalImg);
+                    modalMedia = modalImg;
+                }
+                currentIndex = index;
+                updateImageCounter();
+            }
+        
+            function updateImageCounter() {
+                const itemType = galleryItems[currentIndex].tagName === 'VIDEO' ? 'Video' : 'Image';
+                document.querySelector('.numbertext').textContent = 
+                    `${itemType} ${currentIndex + 1} / ${galleryItems.length}`;
+            }
+        
+            document.querySelector(".close").addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+        
+            document.querySelector(".next").addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                showMedia(currentIndex);
+            });
+        
+            document.querySelector(".prev").addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                showMedia(currentIndex);
+            });
+        
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === "block") {
+                    if (e.key === "ArrowRight") {
+                        currentIndex = (currentIndex + 1) % galleryItems.length;
+                        showMedia(currentIndex);
+                    }
+                    else if (e.key === "ArrowLeft") {
+                        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                        showMedia(currentIndex);
+                    }
+                    else if (e.key === "Escape") {
+                        modal.style.display = "none";
+                    }
+                }
+            });
+        
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        </script>
     </body>
 </html>
