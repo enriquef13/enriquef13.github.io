@@ -18,24 +18,26 @@
             }
             .project-content {
                 max-width: 50em;
-                margin: 0 auto;
+                margin: 1em auto;
                 padding: 2em;
                 background: white;
                 box-shadow: 0 0 20px rgba(0,0,0,0.1);
                 margin-top: 80px; /* Space for the back button */
+                margin-bottom: 80px;
             }
             .back-button {
                 position: fixed;
-                top: 30px;
-                left: 30px;
+                top: 25px;
+                left: 20px;
                 z-index: 1000;
-                padding: 10px 20px;
-                background: black;
+                padding: 12px 20px;
+                background: rgba(0, 0, 0, 0.7);
                 color: white;
                 font-weight: bolder;
                 text-decoration: none;
-                border-radius: 10px;
                 transition: background-color 0.3s ease;
+				border-radius: 25px;
+				backdrop-filter: blur(5px);
             }
             .back-button:hover {
                 background: #5a4a4a;
@@ -221,6 +223,8 @@
                 .project-content {
                     padding: 1em;
                     margin-top: 60px;
+                    margin-left: 10px;
+                    margin-right: 10px;
                 }
 
                 .wrapper {
@@ -240,11 +244,11 @@
         </style>
     </head>
     <body class="is-preload">
-        <a href="../index.html#projects" class="back-button">← Back to Projects</a>
+        <a href="../index.html#projects" class="back-button"><i class="arrow icon solid fa-chevron-left"></i>&nbsp BACK</a>
         
         <div class="project-content">
             <div class="wrapper">
-                <h1 style="font-weight: bold;">Pick-and-Place Robot</h1>
+                <h1>Pick-and-Place Robot</h1>
                 <p style="margin-top: 1em;">Design, manufacturing, and control of an aluminum, low-cost 2-axis pick-and-place parallel robot.</p>
                 
                 <div class="flex-container" style="margin-top: -1em;">
@@ -257,7 +261,7 @@
                 </div>
                 
                 <h2 style="margin-top: 1em;">Overview</h2>
-                <p style="margin-top: 1em;">This is an undergraduate project I worked on during my studies at Monterrey Tech with a team of 6 mechatronics engineers. The main goal was to design and develop a lightweight and competitively priced robotic workstation for an industrial manufacturing cell, as existing solutions are generally lacking in both areas, as shown below. This required the use of a parallel pick-and-place robot with 2 Degrees of Freedom (DoF), a working area of 450 x 200 mm, and compatibility with industrial communication protocols.</p>
+                <p style="margin-top: 1em;">This is an undergraduate project I worked on during my studies at Monterrey Tech with a team of 6 mechatronics engineers. The main goal was to design and develop a <strong>lightweight and competitively priced robotic workstation</strong> for an industrial manufacturing cell, as existing solutions are generally lacking in both areas, as shown below. This required the use of a parallel pick-and-place robot with 2 Degrees of Freedom (DoF), a working area of 450 x 200 mm, and compatibility with industrial communication protocols.</p>
             
 
                 <h2>Design</h2>
@@ -467,7 +471,7 @@
                 </div>
 
                 <h2>Contributors</h2>
-                <p style="margin-top: 1em; margin-bottom: -1em;"> Alejandro Butterfield, Marlene Cobian, Christi Eguiza, Jesus Cervantes, and Ana Isabel Padilla</p>
+                <p style="margin-top: 1em; margin-bottom: 0em;"> Alejandro Butterfield, Marlene Cobian, Christi Eguiza, Jesus Cervantes, and Ana Isabel Padilla.</p>
                 
                 <div class="bottom-contact">
 					<a href="tel:+16172307448" class="icon solid fa-phone" title="(617) 230 7448"></a>

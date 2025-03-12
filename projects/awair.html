@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>AwAir</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="icon" href="../assets/css/images/ef_icon.png" />
+        <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            .equation {
+                margin: 1em 0;
+                padding: 1em;
+                background: white;
+                border-radius: 5px;
+            }
+            .project-content {
+                max-width: 50em;
+                margin: 1em auto;
+                padding: 2em;
+                background: white;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                margin-top: 80px; /* Space for the back button */
+                margin-bottom: 80px;
+            }
+            .back-button {
+                position: fixed;
+                top: 25px;
+                left: 20px;
+                z-index: 1000;
+                padding: 12px 20px;
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                font-weight: bolder;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+				border-radius: 25px;
+				backdrop-filter: blur(5px);
+            }
+            .back-button:hover {
+                background: #5a4a4a;
+            }
+            .project-image {
+                width: 100%;
+                max-width: 500px;
+                margin: 2em 0;
+            }
+            .wrapper {
+                padding: 20px;
+            }
+
+            .flex-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+                margin: 1em 0;
+            }
+
+            .flex-item {
+                flex: 1;
+            }
+
+            .flex-text {
+                line-height: 1.3em;
+            }
+
+            .flex-image {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .flex-video {
+                width: 100%;
+                height: auto;
+            }
+
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                margin: 2em 0;
+            }
+            
+            .gallery-item {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 4/3;
+                cursor: pointer;
+                overflow: hidden;
+            }
+            
+            .gallery-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            
+            .gallery-item:hover img {
+                transform: scale(1.05);
+            }
+
+            .gallery-item video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .gallery-item:hover video {
+                transform: scale(1.05);
+            }
+
+            .modal-content.video {
+                width: 80%;
+                height: auto;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+
+            .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 90%;
+                max-height: 90vh;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                object-fit: contain;
+                z-index: 1000;
+            }
+
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1001;  /* Add this line to make arrows appear in front */
+            }
+
+            .prev, .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 16px;
+                margin-top: -50px;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+                -webkit-user-select: none;
+                z-index: 1001;  /* Add this line to make arrows appear in front */
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            .numbertext {
+                color: #f2f2f2;
+                font-size: 12px;
+                padding: 8px 12px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .bottom-contact {
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				gap: 30px;
+				z-index: 1000;
+				background-color: rgba(0, 0, 0, 0.7);
+				padding: 12px 20px;
+				border-radius: 25px;
+				backdrop-filter: blur(5px);
+			}
+
+			.bottom-contact a {
+			    color: white;
+				font-size: 1.5em;
+				transition: color 0.3s ease;
+			}
+
+			.bottom-contact a:hover {
+				color: #cccccc;
+			}
+            
+            /* Media queries for mobile responsiveness */
+            @media screen and (max-width: 768px) {
+                .flex-container {
+                    flex-direction: column;
+                }
+
+                .flex-item {
+                    width: 100%;
+                    margin: 10px 0;
+                }
+
+                .project-content {
+                    padding: 1em;
+                    margin-top: 60px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+
+                .wrapper {
+                    padding: 10px;
+                }
+
+                .equation {
+                    padding: 0.5em;
+                    font-size: 0.9em;
+                }
+
+                .gallery-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+            }
+        </style>
+    </head>
+    <body class="is-preload">
+        <a href="../index.html#projects" class="back-button"><i class="arrow icon solid fa-chevron-left"></i>&nbsp BACK</a>
+        
+        <div class="project-content">
+            <div class="wrapper">
+                <h1>AwAir</h1>
+                <p style="margin-top: 1em;">Network of sustainable, low-cost air quality sensors for local and regional environmental monitoring.</p>
+                
+                <div class="flex-container" style="margin-top: -1em;">
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="awair/renders.png" alt="Me with the robot" style="width: 100%;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="awair/dashboard.png" title="Dashboard" style="width: 100%;">
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 1em;">Overview</h2>
+                <p style="margin-top: 1em;">This was my senior undergraduate project at Monterrey Tech. Alongside 4 teammates, we set on the goal of providing the city of Guadalajara, Mexico, with a reliable way of monitoring air quality. This was of crucial necessity, as <strong>the city was facing a wildfire crisis (<a href="https://jalisco.gob.mx/prensa/noticias/157938" target="_blank">source</a>)</strong> that was severly affecting the quality of life for vulnerable populations. The hope was that, with this real-time monitoring network, authorities and civilians could take timely actions to ensure everyone's safety. This could involve, depending on the severity and nature of the environmental conditions, closing home windows, turning on air humidifiers or AC units, putting on oxygen masks, etc.
+                
+                </p>
+
+                <h2>Network Design</h2>
+                <div class="flex-container">
+                    <div class="flex-item flex-text">
+                        <p> 
+                            The initial design step revolved around the creation of a network that could cover wide areas, even when Wi-Fi was not readily available. To achieve this, we decided to communicate gateways, with internet access, and nodes, with no internet access, through <strong>LoRaWAN</strong>, which uses radio frequency and has long range coverage. 
+                            <br>
+                            <br>
+                            Then, through <strong>epidemic routing</strong>, we created a network where all readings from nodes can reach gateways that upload the data to the cloud, maximizing message delivery rate and minimizing latency
+                        </p> 
+                    </div>  
+                    <div class="flex-item" style=" margin-top: -2em;">
+                        <img class="flex-image" src="awair/map_nodes.png" alt="Nodes map" style="width: 100%;">
+                    </div>
+                </div>
+                
+                <div class="flex-container">
+                    <div class="flex-item flex-text" style="margin-top: -2em;">
+                        <p>
+                            A sample network layout with 3 nodes and 1 gateway is shown in the image above. Here, nodes send their data to all available (within reach) nodes/gateways once. Any duplicate messages received are discarded, and the rest are forwarded until a gateway is reached. Once this happens, messages are uploaded to the cloud. This is illustrated in the next image.
+                        </p>
+                        
+                    </div>
+
+                    <div class="flex-item" style="margin-top: -2em; margin-left: 1em;">
+                        <img class="flex-image" src="awair/epidemic_routing.png" alt="Epidemic routing" style="height: 100%;">
+                    </div>
+                </div>
+
+                <p style="margin-top: -1em;">
+                    <strong>Finite State Machines (FSM)</strong> are shown for the gateway and node, respectively, in the next images. These showcase the behavior of the devices, which ensure that they are capable of communicating with each other and the cloud in the desired manner. 
+                </p>
+
+                <div class="flex-container" style="align-items: center; margin-top: -1em;">
+                    <div class="flex-item flex-image">
+                        <img src="awair/fsm_aw1.png" alt="FSM Gateway" style="width: 105%; margin-left: 0em;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img src="awair/fsm_node.png" alt="FSM Node" style="width: 100%; margin-left: 0em;">
+                    </div>
+                </div>
+                
+                <h2>Product Design</h2>
+                <p style="margin-top: 2em;">
+                    One type of node and two types of gateways were designed to construct this network. All nodes were equipped with an <strong>MCU, solar panels, battery, LoRa module, and air quality sensors</strong>, which are shown in depth later, while the gateways also incorporated a Wi-Fi module. This design was made with autonomy in mind, eliminating power supply constraints. However, a second variation of the gateway was designed to be held at home, adding an OLED display and removing the solar panels. With this, the network could be expanded by individuals and by institutions alike. The node and gateway designs are shown below.
+                </p>
+
+                <div class="flex-container" style="align-items: center;">
+                    <div class="flex-item flex-image" style="margin-top: -2em;">
+                        <img src="awair/node_gateway.png" alt="Node" style="width: 80%; margin-left: 2em;">
+                    </div>
+                    <div class="flex-item flex-image" style="margin-top: -2em;">
+                        <img src="awair/gateway.png" alt="Gateway" style="width: 80%; margin-left: 2em;">
+                    </div>
+                </div>
+                
+                <p>
+                    For air quality monitoring, a <strong>PMS5003 Particulate Matter (PM) sensor</strong> was used, which was capable of detecting particles as small as 2.5 micrometers in diameter. This sensor was chosen due to its low cost and high accuracy. Furthermore, a <strong>DHT temperature and humidity sensor and a BMP280 atmospheric pressure sensor</strong> were added, providing more insights into the environmental status. All the components were integrated into a <strong>custom PCB</strong>, which was shared for both the node and the gateway. It included a battery charging circuit and testing zones. All the components and the custom PCB are shown below. 
+                </p>
+
+                <div class="flex-container" style="align-items: center;">
+                    <div class="flex-item flex-image">
+                        <img src="awair/electronics_aw1.png" alt="PCB" style="width: 80%; margin-left: 1.5em;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img src="awair/components.png" alt="Components" style="width: 100%;">
+                    </div>
+                </div>
+
+                <h2>Results</h2>
+                <p style="margin-top: 1em;">
+                    A network with 3 nodes and 1 gateway was used as a proof of concept in the Monterrey Tech campus. Each device covered a <strong>350 meter radius</strong>, achieving a message delivery rate of 100%. All the results were published to a <strong>Google Firebase database</strong>, which was then used to create a <strong>Retool real-time dashboard</strong> that displayed the air quality data for any given node or gateway location. This dashboard was accessible to the public and was used to showcase the network's capabilities. The proof of concept devices, are shown below. Furthermore, videos and images of the network's operation are shown in the gallery.
+                </p>
+
+                <div class="flex-container" style="margin-top: -1em; height: auto;">
+                    <div class="flex-item flex-image">
+                        <img class="flex-image" src="awair/at_home.png" title="Results 1" style="width: 78%; margin-left: 1em;">
+                    </div>
+                    <div class="flex-item flex-image">
+                        <img class="flex-image " src="awair/aw1_side.png" alt="Results 2" style="width: 90%;">
+                    </div>
+                </div>
+
+                <h2>Gallery</h2>
+                <p style="margin-top: 1em;">
+                    Images and videos of the testing phase and the final prototypes are shown. Click on any image or video to enlarge it.
+                </p>
+                <div class="gallery-grid" style="margin-top: -1em;">
+                    <div class="gallery-item">
+                        <img src="awair/gallery/power_panel.jpg" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="awair/gallery/team.jpeg" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="awair/gallery/step_up_test.png" alt="Manufacturing process 4">
+                    </div>
+
+                    <div class="gallery-item">
+                        <video src="awair/gallery/lora_drain.MOV" alt="Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <video src="awair/gallery/home_aw1.mp4" alt="Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <video src="awair/gallery/awair_street.mp4" alt="Gallery 4" poster="awair/gallery/street_thumbnail.png">
+                    </div>
+
+                    <div class="gallery-item">
+                        <video src="awair/gallery/humidifier.MOV" alt="Gallery 2">
+                    </div>
+                    <div class="gallery-item">
+                        <video src="awair/gallery/at_home_vid.mp4" alt="Manufacturing process 4" poster="awair/gallery/at_home_thumbnail.png">
+                    </div>
+                    <div class="gallery-item">
+                        <video src="awair/gallery/wood.MOV" alt="Gallery 1" poster="awair/gallery/wood_thumnail.png">
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <video src="awair/gallery/temperature.MOV" alt="Gallery 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="awair/gallery/devices.jpeg" alt="Gallery 4">
+                    </div>                    
+                    <div class="gallery-item">
+                        <img src="awair/gallery/temperature_test.png" alt="Manufacturing process 4">
+                    </div>
+
+                    
+                    <div class="gallery-item">
+                        <img src="awair/gallery/slot_pm.png" alt="Manufacturing process 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="awair/gallery/at_home_side.png" alt="Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="awair/gallery/at_home_exploded.png" alt="Gallery 4">
+                    </div>
+                </div>
+                
+                <div id="galleryModal" class="modal">
+                    <span class="close">&times;</span>
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
+                    <div class="numbertext"></div>
+                    <img class="modal-content" id="modalImg">
+                </div>
+
+                <h2>Contributors</h2>
+                <p style="margin-top: 1em; margin-bottom: 0em;"> Alejandro Butterfield, Sebastian Balarezo, Jesus Cervantes, and Diego Gatica.</p>
+                
+                <div class="bottom-contact">
+					<a href="tel:+16172307448" class="icon solid fa-phone" title="(617) 230 7448"></a>
+					<a href="mailto:enriquef@mit.edu" class="icon solid fa-envelope" title="enriquef@mit.edu"></a>
+					<a href="https://linkedin.com/in/enriquefloresm" class="icon brands fa-linkedin" target="_blank" title="LinkedIn Profile"></a>
+				</div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/browser.min.js"></script>
+        <script src="../assets/js/breakpoints.min.js"></script>
+        <script src="../assets/js/util.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script>
+            const modal = document.getElementById("galleryModal");
+            const modalContent = document.getElementById("modalImg");
+            const galleryItems = document.querySelectorAll('.gallery-item img, .gallery-item video');
+            let currentIndex = 0;
+            let modalMedia = modalContent;
+        
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    modal.style.display = "block";
+                    showMedia(index);
+                });
+            });
+        
+            function showMedia(index) {
+                const item = galleryItems[index];
+                if (item.tagName === 'VIDEO') {
+                    const modalVideo = document.createElement('video');
+                    modalVideo.src = item.src;
+                    modalVideo.classList.add('modal-content');
+                    modalVideo.classList.add('video');
+                    modalVideo.controls = true;
+                    modalVideo.autoplay = true;
+                    
+                    modalMedia.replaceWith(modalVideo);
+                    modalMedia = modalVideo;
+                } else {
+                    const modalImg = document.createElement('img');
+                    modalImg.src = item.src;
+                    modalImg.classList.add('modal-content');
+                    
+                    modalMedia.replaceWith(modalImg);
+                    modalMedia = modalImg;
+                }
+                currentIndex = index;
+                updateImageCounter();
+            }
+        
+            function updateImageCounter() {
+                const itemType = galleryItems[currentIndex].tagName === 'VIDEO' ? 'Video' : 'Image';
+                document.querySelector('.numbertext').textContent = 
+                    `${itemType} ${currentIndex + 1} / ${galleryItems.length}`;
+            }
+        
+            document.querySelector(".close").addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+        
+            document.querySelector(".next").addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                showMedia(currentIndex);
+            });
+        
+            document.querySelector(".prev").addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                showMedia(currentIndex);
+            });
+        
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === "block") {
+                    if (e.key === "ArrowRight") {
+                        currentIndex = (currentIndex + 1) % galleryItems.length;
+                        showMedia(currentIndex);
+                    }
+                    else if (e.key === "ArrowLeft") {
+                        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                        showMedia(currentIndex);
+                    }
+                    else if (e.key === "Escape") {
+                        modal.style.display = "none";
+                    }
+                }
+            });
+        
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>
