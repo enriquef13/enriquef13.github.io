@@ -84,12 +84,17 @@
 				left: 0;
 			}
 
-			#interest .image img {
+			#interest .image img,
+			#interest .image video {
 				transition: all 0.3s ease;
 				border: 2px solid transparent;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
 			}
 
-			#interest .image img:hover {
+			#interest .image img:hover,
+			#interest .image video:hover {
 				transform: scale(1.02);
 				border-color: #453939;
 				box-shadow: 0 0 10px rgba(69, 57, 57, 0.3);
@@ -110,9 +115,9 @@
 			}
 
 			@media screen and (max-width: 768px) {
+				#interest .image img,
 				#interest .image video,
 				#interest .image video[poster] {
-					aspect-ratio: 16/9;
 					width: 100%;
 					height: auto;
 				}
